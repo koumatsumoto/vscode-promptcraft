@@ -33,10 +33,6 @@
     },
     "commands": [
       {
-        "command": "promptkit.helloWorld",
-        "title": "Hello World"
-      },
-      {
         "command": "promptkit.createPrompt",
         "title": "PromptKit: 新規プロンプト作成"
       }

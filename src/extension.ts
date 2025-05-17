@@ -24,15 +24,6 @@ export function activate(context: vscode.ExtensionContext) {
     vscode.window.registerTreeDataProvider("promptkitView", treeProvider);
   }
 
-  const disposable = vscode.commands.registerCommand("promptkit.helloWorld", () => {
-    Logger.info('Command "promptkit.helloWorld" executed');
-    try {
-      vscode.window.showInformationMessage("Hello World from PromptKit!");
-    } catch (e) {
-      Logger.error(`Command execution failed: ${e}`);
-    }
-  });
-
   const createPromptDisposable = vscode.commands.registerCommand("promptkit.createPrompt", async () => {
     try {
       const folders = vscode.workspace.workspaceFolders;
@@ -104,7 +95,7 @@ export function activate(context: vscode.ExtensionContext) {
     }
   });
 
-  context.subscriptions.push(disposable, createPromptDisposable, openPromptDisposable, outputChannel);
+  context.subscriptions.push(createPromptDisposable, openPromptDisposable, outputChannel);
 }
 
 /**
