@@ -3,7 +3,7 @@
   "displayName": "PromptKit",
   "description": "A VS Code extension that helps you create, organize, and reuse AI instructions efficiently. PromptKit creates a dedicated workspace folder for your AI prompts, provides a sidebar interface for quick access to your instruction library, and enables seamless creation of new instructions with a single click.",
   "publisher": "KouMatsumoto",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "repository": "git@github.com:koumatsumoto/vscode-promptkit.git",
   "engines": {
     "vscode": "^1.100.0"
