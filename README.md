@@ -1,71 +1,45 @@
-# promptcraft README
+# PromptCraft
 
-This is the README for your extension "promptcraft". After writing up a brief description, we recommend including the following sections.
+PromptCraftは、生成AIへのプロンプトを効率的に作成・管理するためのVisual Studio Code拡張機能です。開発者やAIユーザーがプロンプトを整理し、再利用できる環境を提供します。
 
-## Features
+## 目的
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+- 生成AIに対するプロンプトの作成・編集を容易にする
+- プロンプトを体系的に保存・管理する仕組みを提供する
+- 過去に作成したプロンプトに簡単にアクセスできるようにする
+- プロンプト作成のワークフローを効率化する
 
-For example if there is an image subfolder under your extension project workspace:
+## 主な機能
 
-\!\[feature X\]\(images/feature-x.png\)
+- **プロンプト管理フォルダ**  
+  拡張機能がアクティベートされると、ワークスペース内に`.promptcraft`フォルダが自動作成され、日付ごとにプロンプトがMarkdown形式で保存されます。
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+- **サイドバーUI**  
+  VS CodeのサイドバーにPromptCraftパネルが追加され、新規プロンプト作成ボタンや日付ごとのプロンプトツリービューが利用できます。
 
-## Requirements
+- **プロンプト作成・編集**  
+  「新規作成」ボタンで新しいMarkdownファイルを作成し、エディタで編集できます。ファイル名は自動で`YYYYMMDD/hhmmss.md`形式となります。
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+## 使い方
 
-## Extension Settings
+1. VS Codeでワークスペースを開く
+2. サイドバーからPromptCraftアイコンをクリック
+3. 「新規作成」ボタンで新しいプロンプトを作成、または既存のプロンプトを選択
+4. エディタでプロンプトを編集
+5. 保存すると自動的にプロンプトが適切な日付フォルダに保存されます
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+## コマンドパレット
 
-For example:
+- `PromptCraft: 新規プロンプト作成`
 
-This extension contributes the following settings:
+## プロンプト保存フォルダ構造例
 
-- `myExtension.enable`: Enable/disable this extension.
-- `myExtension.thing`: Set to `blah` to do something.
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-- [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-- Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-- Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-- Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-- [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-- [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+```
+.promptcraft/
+├── 20250517/
+│   ├── 083000.md
+│   └── 093045.md
+├── 20250518/
+│   └── 110523.md
+└── 20250519/
+    └── 143012.md
