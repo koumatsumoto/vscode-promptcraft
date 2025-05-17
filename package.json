@@ -12,12 +12,42 @@
   "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "promptcraft",
+          "title": "PromptCraft",
+          "icon": "resources/promptcraft.svg"
+        }
+      ]
+    },
+    "views": {
+      "promptcraft": [
+        {
+          "id": "promptcraftView",
+          "name": "PromptCraft"
+        }
+      ]
+    },
     "commands": [
       {
         "command": "promptcraft.helloWorld",
         "title": "Hello World"
+      },
+      {
+        "command": "promptcraft.createPrompt",
+        "title": "PromptCraft: 新規プロンプト作成"
       }
-    ]
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "promptcraft.createPrompt",
+          "when": "view == promptcraftView",
+          "group": "navigation"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
