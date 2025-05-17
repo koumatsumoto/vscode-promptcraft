@@ -1,23 +1,21 @@
-// src/panels/promptcraftTreeProvider.ts
-
 import * as vscode from "vscode";
 import * as path from "path";
 
 /**
- * Represents a node (folder or file) in the .promptcraft tree.
+ * Represents a node (folder or file) in the .promptkit tree.
  */
-export class PromptcraftTreeItem extends vscode.TreeItem {
+export class PromptKitTreeItem extends vscode.TreeItem {
   constructor(
     public override readonly resourceUri: vscode.Uri,
     public override readonly collapsibleState: vscode.TreeItemCollapsibleState,
   ) {
     super(resourceUri, collapsibleState);
-    this.contextValue = this.isDirectory() ? "promptcraftFolder" : "promptcraftFile";
+    this.contextValue = this.isDirectory() ? "promptkitFolder" : "promptkitFile";
     this.label = path.basename(resourceUri.fsPath);
     this.iconPath = this.isDirectory() ? new vscode.ThemeIcon("folder") : new vscode.ThemeIcon("markdown");
     if (!this.isDirectory()) {
       this.command = {
-        command: "promptcraft.openPrompt",
+        command: "promptkit.openPrompt",
         title: "Open Prompt",
         arguments: [this.resourceUri],
       };
@@ -30,13 +28,13 @@ export class PromptcraftTreeItem extends vscode.TreeItem {
 }
 
 /**
- * TreeDataProvider for .promptcraft folder.
+ * TreeDataProvider for .promptkit folder.
  */
-export class PromptcraftTreeProvider implements vscode.TreeDataProvider<PromptcraftTreeItem> {
-  private _onDidChangeTreeData: vscode.EventEmitter<PromptcraftTreeItem | undefined | void> = new vscode.EventEmitter<
-    PromptcraftTreeItem | undefined | void
+export class PromptKitTreeProvider implements vscode.TreeDataProvider<PromptKitTreeItem> {
+  private _onDidChangeTreeData: vscode.EventEmitter<PromptKitTreeItem | undefined | void> = new vscode.EventEmitter<
+    PromptKitTreeItem | undefined | void
   >();
-  readonly onDidChangeTreeData: vscode.Event<PromptcraftTreeItem | undefined | void> = this._onDidChangeTreeData.event;
+  readonly onDidChangeTreeData: vscode.Event<PromptKitTreeItem | undefined | void> = this._onDidChangeTreeData.event;
 
   constructor(private workspaceRoot: vscode.Uri) {}
 
@@ -44,23 +42,23 @@ export class PromptcraftTreeProvider implements vscode.TreeDataProvider<Promptcr
     this._onDidChangeTreeData.fire();
   }
 
-  getTreeItem(element: PromptcraftTreeItem): vscode.TreeItem {
+  getTreeItem(element: PromptKitTreeItem): vscode.TreeItem {
     return element;
   }
 
-  async getChildren(element?: PromptcraftTreeItem): Promise<PromptcraftTreeItem[]> {
+  async getChildren(element?: PromptKitTreeItem): Promise<PromptKitTreeItem[]> {
     let dirUri: vscode.Uri;
     if (element) {
       dirUri = element.resourceUri;
     } else {
-      dirUri = vscode.Uri.joinPath(this.workspaceRoot, ".promptcraft");
+      dirUri = vscode.Uri.joinPath(this.workspaceRoot, ".promptkit");
     }
 
     try {
       const entries = await vscode.workspace.fs.readDirectory(dirUri);
       return entries.map(([name, type]) => {
         const childUri = vscode.Uri.joinPath(dirUri, name);
-        return new PromptcraftTreeItem(
+        return new PromptKitTreeItem(
           childUri,
           type === vscode.FileType.Directory ? vscode.TreeItemCollapsibleState.Collapsed : vscode.TreeItemCollapsibleState.None,
         );

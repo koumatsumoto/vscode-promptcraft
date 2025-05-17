@@ -1,39 +1,39 @@
 import * as vscode from "vscode";
 import { Logger } from "./services/logger";
-import { PromptcraftTreeProvider } from "./panels/promptcraftTreeProvider";
+import { PromptKitTreeProvider } from "./panels/PromptKitTreeProvider";
 
 let outputChannel: vscode.OutputChannel | undefined;
 
 // This method is called when your extension is activated
-let treeProvider: PromptcraftTreeProvider | undefined;
+let treeProvider: PromptKitTreeProvider | undefined;
 
 export function activate(context: vscode.ExtensionContext) {
-  outputChannel = vscode.window.createOutputChannel("PromptCraft");
+  outputChannel = vscode.window.createOutputChannel("PromptKit");
   Logger.initialize(outputChannel);
 
-  Logger.info('Extension "promptcraft" activated');
+  Logger.info('Extension "promptkit" activated');
 
-  // Create .promptcraft directory in workspace root if not exists
-  createPromptcraftDirectory();
+  // Create .promptkit directory in workspace root if not exists
+  createPromptKitDirectory();
 
-  // Register PromptCraft sidebar tree view
+  // Register PromptKit sidebar tree view
   const folders = vscode.workspace.workspaceFolders;
   const rootFolder = folders && folders.length > 0 ? folders[0] : undefined;
   if (rootFolder) {
-    treeProvider = new PromptcraftTreeProvider(rootFolder.uri);
-    vscode.window.registerTreeDataProvider("promptcraftView", treeProvider);
+    treeProvider = new PromptKitTreeProvider(rootFolder.uri);
+    vscode.window.registerTreeDataProvider("promptkitView", treeProvider);
   }
 
-  const disposable = vscode.commands.registerCommand("promptcraft.helloWorld", () => {
-    Logger.info('Command "promptcraft.helloWorld" executed');
+  const disposable = vscode.commands.registerCommand("promptkit.helloWorld", () => {
+    Logger.info('Command "promptkit.helloWorld" executed');
     try {
-      vscode.window.showInformationMessage("Hello World from PromptCraft!");
+      vscode.window.showInformationMessage("Hello World from PromptKit!");
     } catch (e) {
       Logger.error(`Command execution failed: ${e}`);
     }
   });
 
-  const createPromptDisposable = vscode.commands.registerCommand("promptcraft.createPrompt", async () => {
+  const createPromptDisposable = vscode.commands.registerCommand("promptkit.createPrompt", async () => {
     try {
       const folders = vscode.workspace.workspaceFolders;
       const rootFolder = folders && folders.length > 0 ? folders[0] : undefined;
@@ -52,8 +52,8 @@ export function activate(context: vscode.ExtensionContext) {
       const fileName = `${hh}${min}${ss}.md`;
 
       const rootUri = rootFolder.uri;
-      const promptcraftUri = vscode.Uri.joinPath(rootUri, ".promptcraft");
-      const dateUri = vscode.Uri.joinPath(promptcraftUri, dateFolder);
+      const promptkitUri = vscode.Uri.joinPath(rootUri, ".promptkit");
+      const dateUri = vscode.Uri.joinPath(promptkitUri, dateFolder);
       const fileUri = vscode.Uri.joinPath(dateUri, fileName);
 
       // Ensure date folder exists
@@ -93,7 +93,7 @@ export function activate(context: vscode.ExtensionContext) {
     }
   });
 
-  const openPromptDisposable = vscode.commands.registerCommand("promptcraft.openPrompt", async (resourceUri: vscode.Uri) => {
+  const openPromptDisposable = vscode.commands.registerCommand("promptkit.openPrompt", async (resourceUri: vscode.Uri) => {
     try {
       const doc = await vscode.workspace.openTextDocument(resourceUri);
       await vscode.window.showTextDocument(doc);
@@ -108,35 +108,35 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 /**
- * Create .promptcraft directory in the workspace root if it does not exist.
+ * Create .promptkit directory in the workspace root if it does not exist.
  */
-async function createPromptcraftDirectory() {
+async function createPromptKitDirectory() {
   try {
     const folders = vscode.workspace.workspaceFolders;
     const rootFolder = folders && folders.length > 0 ? folders[0] : undefined;
     if (!rootFolder) {
-      Logger.warn("No workspace folder found. .promptcraft directory not created.");
+      Logger.warn("No workspace folder found. .promptkit directory not created.");
       return;
     }
     const rootUri = rootFolder.uri;
-    const promptcraftUri = vscode.Uri.joinPath(rootUri, ".promptcraft");
+    const promptkitUri = vscode.Uri.joinPath(rootUri, ".promptkit");
     // Check if directory exists
     try {
-      await vscode.workspace.fs.stat(promptcraftUri);
-      Logger.info(".promptcraft directory already exists.");
+      await vscode.workspace.fs.stat(promptkitUri);
+      Logger.info(".promptkit directory already exists.");
     } catch {
       // Directory does not exist, create it
-      await vscode.workspace.fs.createDirectory(promptcraftUri);
-      Logger.info(".promptcraft directory created.");
+      await vscode.workspace.fs.createDirectory(promptkitUri);
+      Logger.info(".promptkit directory created.");
     }
   } catch (e) {
-    Logger.error(`Failed to create .promptcraft directory: ${e}`);
+    Logger.error(`Failed to create .promptkit directory: ${e}`);
   }
 }
 
 // This method is called when your extension is deactivated
 export function deactivate() {
-  Logger.info('Extension "promptcraft" deactivated');
+  Logger.info('Extension "promptkit" deactivated');
   if (outputChannel) {
     outputChannel.dispose();
     outputChannel = undefined;

@@ -1,10 +1,10 @@
 {
-  "name": "promptcraft",
-  "displayName": "PromptCraft",
-  "description": "A VS Code extension that helps you create, organize, and reuse AI instructions efficiently. PromptCraft creates a dedicated workspace folder for your AI prompts, provides a sidebar interface for quick access to your instruction library, and enables seamless creation of new instructions with a single click.",
+  "name": "promptkit",
+  "displayName": "PromptKit",
+  "description": "A VS Code extension that helps you create, organize, and reuse AI instructions efficiently. PromptKit creates a dedicated workspace folder for your AI prompts, provides a sidebar interface for quick access to your instruction library, and enables seamless creation of new instructions with a single click.",
   "publisher": "KouMatsumoto",
   "version": "0.0.1",
-  "repository": "git@github.com:koumatsumoto/vscode-promptcraft.git",
+  "repository": "git@github.com:koumatsumoto/vscode-promptkit.git",
   "engines": {
     "vscode": "^1.100.0"
   },
@@ -17,35 +17,35 @@
     "viewsContainers": {
       "activitybar": [
         {
-          "id": "promptcraft",
-          "title": "PromptCraft",
+          "id": "promptkit",
+          "title": "PromptKit",
           "icon": "assets/icons/icon.svg"
         }
       ]
     },
     "views": {
-      "promptcraft": [
+      "promptkit": [
         {
-          "id": "promptcraftView",
-          "name": "PromptCraft"
+          "id": "promptkitView",
+          "name": "PromptKit"
         }
       ]
     },
     "commands": [
       {
-        "command": "promptcraft.helloWorld",
+        "command": "promptkit.helloWorld",
         "title": "Hello World"
       },
       {
-        "command": "promptcraft.createPrompt",
-        "title": "PromptCraft: 新規プロンプト作成"
+        "command": "promptkit.createPrompt",
+        "title": "PromptKit: 新規プロンプト作成"
       }
     ],
     "menus": {
       "view/title": [
         {
-          "command": "promptcraft.createPrompt",
-          "when": "view == promptcraftView",
+          "command": "promptkit.createPrompt",
+          "when": "view == promptkitView",
           "group": "navigation"
         }
       ]
